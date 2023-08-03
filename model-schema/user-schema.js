@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const BlockedNumberSchema = new Schema(
     {   
         blockedNumber:  {   type: String,
-                            required: false
+                            required: true,
                         },
         timeStamp:      {   type: Date,
-                            required: false
+                            required: true
                         }
     }
 )
@@ -15,7 +15,7 @@ const BlockedNumberSchema = new Schema(
 const WhiteListSchema = new Schema(
     {
         whiteListedNumber:  {   type: String,
-                                require: false
+                                require: false,
                             },
         timeStamp:          {   type: Date,
                                 required: false
@@ -26,10 +26,17 @@ const WhiteListSchema = new Schema(
 const EntrySchema = new Schema(
     {
         emailAddress:   {   type: String,
-                            required: true,
                             unique: true,
                             lowercase: true,
-                            trim: true
+                            trim: true,
+                            required: true,
+                            validate: {
+                                validator: function(v) {
+                                  return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_.+-]+$/.test(v);
+                                },
+                                message: props => `${props.value} is not a valid email address!`
+                            },
+                            required: [true, 'User phone number required']
                         },
         password:       {   type: String,
                             required: true
@@ -37,13 +44,13 @@ const EntrySchema = new Schema(
         countryCode:    {   type: [String],
                             required: false,
                         },
-        hpNumber:       {   type: Number,
+        hpNumber:       {   type: String,
+                            required: false,
+                        },
+        officeNumber:   {   type: String,
                             required: false
                         },
-        officeNumber:   {   type: Number,
-                            required: false
-                        },
-        homeNumber:     {   type: Number,
+        homeNumber:     {   type: String,
                             required: false
                         },
         blockedNumbers: {   type: [BlockedNumberSchema],
@@ -58,8 +65,6 @@ const EntrySchema = new Schema(
 
 module.exports = mongoose.model("projectuser", EntrySchema)
 
-// mongoose will lowercase and pluralize to find the matching collection which is 'projectusers'
+// mongoose will lowercase and pluralize to find the matching collection which is 'projectusers', define the DB in MONGO_URL
 // Schema with defined types will provide some degree of validation and sanitization
-// mongoose allows custom validate functions thru 'validate' in schema, but not necessary at current
-// to add a validator as necessary
 

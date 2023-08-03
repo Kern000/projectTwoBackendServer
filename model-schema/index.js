@@ -9,9 +9,6 @@ const dbConnection = mongoose.connection;
     useUnifiedTopology: true});
     }) (). catch(err => console.log(err));
 
-
-            
-
 dbConnection.on("error", (err) => console.log(err.message + 'mongo Connection Error'));
 dbConnection.on("connected", () => console.log("mongo connected"));
 dbConnection.on("disconnected", () => console.log("mongo disconnected"))

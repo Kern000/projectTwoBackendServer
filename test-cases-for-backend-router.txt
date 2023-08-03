@@ -1,0 +1,103 @@
+*** Test Cases For Backend Server ***
+
+---------------------------
+Global Get for testing:
+(tested) GET http://localhost:3001/user/64ca19d5956f61de2d6b8b31
+
+** Note: for Global Get, need to uncomment the methods in service, controller, and router layers first
+** This includes import, export, functions, route
+
+---------------------------
+router.get("/:id/:keyOfDataArray/find-all", retrieveNestedArray);
+(tested) http://localhost:3001/user/64ca2ffba3b69c339218067c/blockedNumbers/find-all
+(tested) http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/find-all
+(tested) http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/find-all
+
+---------------------------
+router.get("/:id/:keyOfDataArray/search",findItem)
+(tested) http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/search?search=667
+(tested) http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/search?search=3349834
+(tested) http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/blockedNumber/search?search=29233828
+
+---------------------------
+(Tested) router.post("/", createProfile);
+{
+"emailAddress":"nihao10@gmail.com",
+"password":"blahblahblacksheep"
+}
+
+---------------------------
+(tested) router.post("/:id/:keyOfDataArray/add", addToNestedArray);
+Test case (1)
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/add
+{
+"blockedNumber":"304042811",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+Test case (2)
+http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/add
+{
+"whiteListedNumber":"999",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/add
+{
+"blockedNumber":"300003000",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+---------------------------
+
+(tested) router.patch("/:id/:keyOfField", updateProfile);
+Test Case(1)
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/officeNumber
+{"officeNumber": "8000001"}
+
+---------------------------
+
+==== Testing Delete ====
+
+AddFirst POST:
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/add
+{
+"blockedNumber":"300003001",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+{
+"blockedNumber":"300003002",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+{
+"blockedNumber":"300003003",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/add
+{
+"whiteListedNumber":"10000",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+{
+"whiteListedNumber":"10001",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+{
+"whiteListedNumber":"10002",
+"timeStamp":"2023-08-15T00:00:10.000Z"
+}
+
+router.delete("/:id/:keyOfDataArray/delete", deleteFromNestedArray);
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/blockedNumber/300003001/delete
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/blockedNumber/300003002/delete
+http://localhost:3001/user/64ca19d5956f61de2d6b8b31/blockedNumbers/blockedNumber/300003003/delete
+
+http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/10000/delete
+http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/10001/delete
+http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/10002/delete
+

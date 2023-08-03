@@ -7,26 +7,18 @@ const { createProfile,
         deleteFromNestedArray,
         retrieveNestedArray,
         findItem,
-        getOne
+        // getOne // (only for testing)
       } = require("../controller-layer/entry-controller");
 
+//tested:
 router.post("/", createProfile);
 router.post("/:id/:keyOfDataArray/add", addToNestedArray);
-
-router.put("/:id/:keyOfField", updateProfile);
-
-
-router.delete("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition/delete", deleteFromNestedArray);
-
-//tested:
 router.get("/:id/:keyOfDataArray/find-all", retrieveNestedArray);
 router.get("/:id/:keyOfDataArray/:nestedDataKey/search",findItem)
+router.patch("/:id/:keyOfField", updateProfile);
+router.patch("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition/delete", deleteFromNestedArray);
+
 // router.get("/:id", getOne) //for testing only (user no access)
 
 module.exports = {router};
-
-//Example of GET for findItem is
-// /user/123/blockedNumbers/search?searchItem=xxx
-// xxx will be the search condition
-
 
