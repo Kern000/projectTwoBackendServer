@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BlockedNumberSchema = new Schema(
     {   
-        blockedNumber:  {   type: Number,
+        blockedNumber:  {   type: String,
                             required: false
                         },
         timeStamp:      {   type: Date,
@@ -14,7 +14,7 @@ const BlockedNumberSchema = new Schema(
 
 const WhiteListSchema = new Schema(
     {
-        whiteListedNumber:  {   type: Number,
+        whiteListedNumber:  {   type: String,
                                 require: false
                             },
         timeStamp:          {   type: Date,
@@ -29,8 +29,7 @@ const EntrySchema = new Schema(
                             required: true,
                             unique: true,
                             lowercase: true,
-                            trim: true,
-                            match: [/^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z.]{2,3}$/, "Enter correct email address"]
+                            trim: true
                         },
         password:       {   type: String,
                             required: true
@@ -50,7 +49,7 @@ const EntrySchema = new Schema(
         blockedNumbers: {   type: [BlockedNumberSchema],
                             required: false
                         },
-        WhiteList:      {   type: [WhiteListSchema],
+        whiteList:      {   type: [WhiteListSchema],
                             required: false
                         }
     }
@@ -62,5 +61,5 @@ module.exports = mongoose.model("projectuser", EntrySchema)
 // mongoose will lowercase and pluralize to find the matching collection which is 'projectusers'
 // Schema with defined types will provide some degree of validation and sanitization
 // mongoose allows custom validate functions thru 'validate' in schema, but not necessary at current
-// \. is used to recognize . in the .com or .org etc. of email string
+// to add a validator as necessary
 

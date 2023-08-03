@@ -10,6 +10,16 @@ const create = async (data) => {
     }
 }
 
+// findById is for testing only
+const findById = async (id) => {
+    try {
+      const entry = await EntryModel.findById(id);
+      return entry;
+    } catch (error) {
+      throw error;
+    }
+  };
+
 const updateFieldData = async (userId, keyOfField, data) =>{
     try{
         const foundUser = await EntryModel.findById(userId);
@@ -29,8 +39,10 @@ const addItemToNestedArray = async (userId, keyOfDataArray, data) => {
     try{
         const foundUser = await EntryModel.findById(userId);
         if (foundUser){
-            foundUser[keyOfDataArray].push(data);
-            const updatedUser = await foundUser.save();
+            console.log(data)
+            let updatedUser = foundUser[keyOfDataArray].push(data);
+            console.log(updatedUser);
+            updatedUser = await foundUser.save();
             return updatedUser;
         } else {
             throw new Error("User not found");
@@ -40,23 +52,50 @@ const addItemToNestedArray = async (userId, keyOfDataArray, data) => {
     }
 }
 
-const deleteMatchingInNestedArray = async (userId, keyOfDataArray, itemMatchCondition) => {
+const deleteMatchingInNestedArray = async (userId, keyOfDataArray, nestedDataKey, itemMatchCondition) => {
     try{
-        const foundUser = await EntryModel.findById(userId);
-        if (foundUser) {
-            const updatedUser = await EntryModel.findByIdAndUpdate(
-                userId,
-                {$pull: {[keyOfDataArray]: itemMatchCondition}},
-                {new: true}
-            );
-            return updatedUser;
-        } else {
-            throw new Error("User not found")
-        }
+        let foundUser = await EntryModel.findById(userId);
+        // console.log(foundUser);
+        // if (foundUser) {
+        //     let updatedUser = await EntryModel.findByIdAndUpdate(
+        //         userId,
+        //         {$pull: {[`${keyOfDataArray}.${nestedDataKey}`]: itemMatchCondition}},
+        //         {new: true}
+        //     );
+        //     console.log(updatedUser);
+        //     return updatedUser;
+        console.log('after finding user =>', userId)
+        console.log('keyOfDataArray =>', keyOfDataArray)
+        console.log('nestedDataKey =>', nestedDataKey)
+        console.log('itemMatchCondition =>', itemMatchCondition)
+
+              if (foundUser) {
+                console.log("this is foundUser =>", foundUser)
+                // Filter the array to exclude the object with the specified _id
+                foundUser[keyOfDataArray] = foundUser[keyOfDataArray].filter(item => item[nestedDataKey] !== itemMatchCondition);
+          
+                console.log("this is after modify =>", foundUser[keyOfDataArray])
+                // Save the updated document to the database
+                let updatedUser = await foundUser.save();
+          
+                console.log("this is after .save =>", updatedUser);
+                return updatedUser;
+              } else {
+                throw new Error("User not found");
+              }
     } catch (error) {
         throw error;
     }
-}
+};
+          
+
+//         } else {
+//             throw new Error("User not found")
+//         }
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 // pull will remove all matching items in the array
 // {new: true} is specific to findByIdAndUpdate, and is needed to return the updated doc, otherwise it will return the original doc before the update is performed
 
@@ -81,18 +120,21 @@ const retrieveNestedArrayData = async (userId, keyOfDataArray, parameterToSortBy
 // based on documentaton, nested item query is 'key.nestedkey'
 
 
-const findItemInNestedArray = async (userId, keyOfDataArray, searchItem) => {
+const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, searchItem) => {
     try{
-        const foundUserItem = await EntryModel.findById(
+        const foundUser = await EntryModel.findById(
             userId,
             {[keyOfDataArray]:1}
-        ).find({[keyOfDataArray]: {$elemMatch: searchItem}})
+        )
         
-        if (!foundUserItem){
+        const nestedArray = foundUser[keyOfDataArray];
+        const matchingItems = nestedArray.filter(item => item[nestedDataKey] === searchItem);
+
+        if (!matchingItems){
             throw new Error("Matching item not found")   
         }
 
-        return foundUserItem;
+        return matchingItems;
 
     } catch (error){
         throw error;
@@ -108,5 +150,6 @@ module.exports =    {
                         updateFieldData,
                         deleteMatchingInNestedArray,
                         retrieveNestedArrayData,
-                        findItemInNestedArray
+                        findItemInNestedArray,
+                        findById
                     }

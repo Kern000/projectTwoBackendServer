@@ -6,15 +6,22 @@ const { createProfile,
         addToNestedArray,
         deleteFromNestedArray,
         retrieveNestedArray,
-        findItem
+        findItem,
+        getOne
       } = require("../controller-layer/entry-controller");
 
 router.post("/", createProfile);
+router.post("/:id/:keyOfDataArray/add", addToNestedArray);
+
 router.put("/:id/:keyOfField", updateProfile);
-router.patch("/:id/:keyOfDataArray/add", addToNestedArray);
-router.patch("/:id/:keyOfDataArray/delete", deleteFromNestedArray);
+
+
+router.delete("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition/delete", deleteFromNestedArray);
+
+//tested:
 router.get("/:id/:keyOfDataArray/find-all", retrieveNestedArray);
-router.get("/:id/:keyOfDataArray/search",findItem)
+router.get("/:id/:keyOfDataArray/:nestedDataKey/search",findItem)
+// router.get("/:id", getOne) //for testing only (user no access)
 
 module.exports = {router};
 
