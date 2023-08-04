@@ -26,7 +26,7 @@ const WhiteListSchema = new Schema(
 const EntrySchema = new Schema(
     {
         emailAddress:   {   type: String,
-                            unique: true,
+                            unique: [true, 'Email already in use'],
                             lowercase: true,
                             trim: true,
                             required: true,
@@ -67,4 +67,4 @@ module.exports = mongoose.model("projectuser", EntrySchema)
 
 // mongoose will lowercase and pluralize to find the matching collection which is 'projectusers', define the DB in MONGO_URL
 // Schema with defined types will provide some degree of validation and sanitization
-
+// email is unique, because only one document per email address, so there is no duplicate

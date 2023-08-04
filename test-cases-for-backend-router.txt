@@ -101,3 +101,36 @@ http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/
 http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/10001/delete
 http://localhost:3001/user/64ca2ffba3b69c339218067c/whiteList/whiteListedNumber/10002/delete
 
+
+===
+
+Current strengths of Server
+1. Strength: service layer and controller methods are made as dynamic as possible. As long as the data structure in the document is similar, it can be applied there. As such, the server can be scaled horizontally with ease and codes cannot be easily reused, requiring only minor amendments. This is in line with embedded data structure used in this project, and facilitates sharding as necessary for geographical service.
+2. Strength: node.js async application of request/response communications overcome the weakness of heavy synchronous load on the server (like in the case of PayPal).
+3. Strength: mongoose provides schema, type, and validation, acting as a last line of defense against security and injection attacks through the servers.
+
+Current weaknesses of Server
+1. Dynamic routes mean that anyone who decipher :id root params of another user may be able to access that user's saved information. Frontend will need to address this through a possible hard coding of axios post/get/create to lock it in to the user's own id. Further authentication and authorization methods to be explored. Will also isolate CRUD to specific item in the document to prevent tampering via params
+
+2. Typescript is not employed on other layers (controller, service, routes) to validate information. Information can currently pass through the router before it is finally validated at the schema at the end. It would be beneficial to create layers of validation starting from the router through a middleware validator, and typescript on each of the layers.
+
+3. Embedded datastructure runs risk of overcapacity - mongo document can only hold 16mb, based on calculation, will be overwhelmed if:
+16 MB = 16 * 1024 * 1024 bytes = 16,777,216 bytes
+Assuming 70 characters * 2 bytes/character = 140 bytes per entry recorded
+16,777,216 bytes / 140 bytes ≈ 119,837
+- if DDoS is 1 per 1s, it will take 33.29 hours to overwhelm a document (since there is no validator to ensure number is unique in the doc);
+- May implement additional validate: in mongoose schema to prevent this if necessary, but currently the recording of timestamp should be helpful to check spam rate
+
+4. Since JWT is stored on local storage, if the local storage device is wiped out. JWT will be lost and user cannot login. SSO will help to mitigate this, but this is not within the scope of the current Minimum Viable Product.
+- future versions would need to implement recovery and reissue of JWT
+- but given that the database isn't really needed for the core function of the app, i.e. blocking calls based on privacy settings, it may not be necessary at this point
+
+
+
+
+
+
+
+
+
+
