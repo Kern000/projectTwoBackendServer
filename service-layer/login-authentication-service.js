@@ -13,16 +13,31 @@ const register = async (registerData) => {
             const saltRounds = 10;
             const salt = await bcrypt.genSalt(saltRounds);
             const hashedPassword = await bcrypt.hash(password, salt);
-            try{
-                const newUser = new User({emailAddress, hashedPassword});
-                await newUser.save();
-                console.log("new account created");
-            } catch (error) {
-                console.log("Failed to create new account, ", error);
-            }
+            
+                try{
+                    firebaseAdmin.auth().createUserWithEmailAndPassword(emailAddress, hashedPassword)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        console.log('New User Authenticated!', user);
+                    })
+                    
+                    try {
+                            const newUser = new User({emailAddress, hashedPassword});
+                            await newUser.save();
+                            console.log("new account created");
+                    
+                    } catch (error) {
+                            console.log("Failed to create new account, ", error);
+                    }
+
+                } catch (error) {
+                    console.error('Failed to create token: ', error);
+                }
+
         } catch (error) {
             console.log("Failed to hash password, ", error);
         }
+
     } else {
         console.log("Email Address already in use!");
     }
@@ -66,7 +81,7 @@ module.exports= {
                     login
                 };
 
+// In real life, need to send verification email to confirm newUser.;
+// would ask user to confirm their password too;
 
-
-// In real life, need to send verification email to confirm newUser.
-// would ask user to confirm their password too
+// Front End will handle storing the token generated;

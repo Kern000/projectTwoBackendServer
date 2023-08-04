@@ -1,3 +1,10 @@
+** Pending Tests **
+bcrypt register
+Firebase login
+
+
+
+
 *** Test Cases For Backend Server ***
 
 ---------------------------
