@@ -1,12 +1,12 @@
 const firebaseAdmin = require("firebase-admin");
 const bcrypt = require('bcrypt');
-const { EntryModel: User } = require('../model-schema')
+const { EntryModel: User } = require('../model-schema');
 
 const register = async (registerData) => {
 
     const {emailAddress, password} = registerData;
 
-    const existingUser = await User.findOne(emailAddress);
+    const existingUser = await User.findOne({'emailAddress': emailAddress});
     
     if (!existingUser) {
         try{
@@ -22,7 +22,11 @@ const register = async (registerData) => {
                     })
                     
                     try {
-                            const newUser = new User({emailAddress, hashedPassword});
+                            const newUser = new User({
+                                'emailAddress':emailAddress, 
+                                'password':hashedPassword, 
+                                'firebaseUid':userCredential.uid
+                            });
                             await newUser.save();
                             console.log("new account created");
                     
@@ -47,7 +51,8 @@ const login = async (loginData) => {
     
     const {emailAddress, password, idToken} = loginData;
 
-    const existingUser = await User.findOne(emailAddress);
+    //idToken will be supplied from frontend
+    const existingUser = await User.findOne({'emailAddress': emailAddress});
 
     const verifyPassword = async (password, storedHashPassword) => {
         const match = await bcrypt.compare(password, storedHashPassword)
@@ -60,11 +65,12 @@ const login = async (loginData) => {
     }
 
     if (existingUser) {
-        const match = verifyPassword(password, existingUser[password])
+        const match = verifyPassword(password, existingUser.password)
         if (match){
             try{
                 await firebaseAdmin.auth().verifyIdToken(idToken);  //if fail to authenticate, will throw error for catching
                 console.log("Authentication Success!");
+                
             } catch (error) {          
                 console.log("Authentication Error!", error);
                 throw error;

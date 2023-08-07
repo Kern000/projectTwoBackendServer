@@ -41,6 +41,11 @@ const EntrySchema = new Schema(
         password:       {   type: String,
                             required: true
                         },
+        firebaseUid:    {
+                            type: String,
+                            required: true,
+                            unique: true
+                        },
         countryCode:    {   type: [String],
                             required: false,
                         },

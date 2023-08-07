@@ -7,23 +7,23 @@ const   {   create: createEntry,                                // 1 argument: d
             retrieveNestedArrayData: retrieveArrayData,         // *Tested, works: 3 arguments: userId, keyOfDataArray, parameterToSortBy
             findItemInNestedArray: retrieveArrayItem,           // *Tested, works: 4 arguments: userId, keyOfDataArray, nestedDataArray, searchItem 
             // deleteNumber2
-            // findById: findOne,                               // Only for testing, user no authorization
+            findById: findOne,                                  // Only for testing, user no authorization
         } = require("../service-layer/entry-service")
 
-        // getOne is only for testing (user have no access)
-        // const getOne = async (req, res) => {
-        //     try{
-        //         const entry = await findOne(req.params.id);
-        //         if(entry){
-        //             return res.json(entry);
-        //         }
-        //         return res.sendStatus(httpStatus.NOT_FOUND);
-        //     }catch(e){
-        //         console.log(`Failed to find entry by id ${req.params.id}`, e);
-        //         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-        //     }
-        // }
-
+// // only for testing: 
+// const getOne = async (req, res) => {
+//     try{
+//         const entry = await findOne(req.params.id);
+//         if(entry){
+//             return res.json(entry);
+//         }
+//         return res.sendStatus(httpStatus.NOT_FOUND);
+//     }catch(e){
+//         console.log(`Failed to find entry by id ${req.params.id}`, e);
+//         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+//     }
+// }
+// only used for authorization, there will not be routes to allow this
 
 // Tested functions are below //
 
@@ -118,8 +118,6 @@ const deleteFromNestedArray = async (req, res) => {
     }
 }
 
-
-
 module.exports= {
                     createProfile,
                     retrieveNestedArray,
@@ -127,5 +125,5 @@ module.exports= {
                     addToNestedArray,
                     updateProfile,
                     deleteFromNestedArray,
-                    // getOne
+                    // getOne                   //only for testing
                 }

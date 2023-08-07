@@ -1,15 +1,14 @@
 const { EntryModel } = require('../model-schema')
 // to use mongoose schema and build on mongoose inbuilt functions for interaction with mongoDB
 
-// findById is for testing only
-// const findById = async (id) => {
-//     try {
-//       const entry = await EntryModel.findById(id);
-//       return entry;
-//     } catch (error) {
-//       throw error;
-//     }
-// };
+const findById = async (id) => {
+    try {
+      const entry = await EntryModel.findById(id);          //finds by the id number only, no need ObjectId format, automatically looks under _id field
+      return entry;
+    } catch (error) {
+      throw error;
+    }
+};
 
 const create = async (data) => {
     try {
@@ -119,5 +118,5 @@ module.exports =    {
                         addItemToNestedArray,
                         updateFieldData,
                         deleteMatchingInNestedArray,
-                        // findById
+                        findById
                     }
