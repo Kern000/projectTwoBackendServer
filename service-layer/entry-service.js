@@ -118,5 +118,5 @@ module.exports =    {
                         addItemToNestedArray,
                         updateFieldData,
                         deleteMatchingInNestedArray,
-                        findById
+                        findById,
                     }

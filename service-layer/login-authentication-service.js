@@ -12,6 +12,9 @@ const login = async (data) => {
         let existingUser = await User.findOne({uid, emailAddress});
         if (existingUser) {
             console.log("Existing User Verified: ", existingUser);
+
+            const fetchParamsId = existingUser._id.toString();
+            return fetchParamsId;
         }
     } catch (error) {
         console.error("Error verifying token", error);
@@ -34,14 +37,14 @@ const register = async (data) => {
         if (!existingUser) {
             existingUser = new User({uid, emailAddress});
             await existingUser.save();
+            const fetchParamsId = existingUser._id.toString()
+            return fetchParamsId
         }
     } catch (error) {
         console.error("Error verifying token", error);
         throw error;
     }
 }
-
-
 
 module.exports= {
                     login,

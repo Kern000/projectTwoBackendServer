@@ -7,8 +7,8 @@ const login = async (req, res) => {
     const idToken = req.headers.authorization? req.headers.authorization.split(" ")[1] : "";
     
     try{
-        await loginUser({uid, emailAddress, idToken})
-        return res.sendStatus(httpStatus.ACCEPTED);
+        const paramsId = await loginUser({uid, emailAddress, idToken})
+        return res.sendStatus(httpStatus.ACCEPTED).send(paramsId);
     } catch (error) {
         console.error("Controller failed to login user", error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
@@ -21,18 +21,16 @@ const register = async (req, res) => {
     const idToken = req.headers.authorization? req.headers.authorization.split(" ")[1] : "";
     
     try{
-        await registerUser({uid, emailAddress, idToken})
-        return res.sendStatus(httpStatus.ACCEPTED);
+        const paramsId = await registerUser({uid, emailAddress, idToken})
+        return res.sendStatus(httpStatus.ACCEPTED).send(paramsId);
     } catch (error) {
         console.error("Controller failed to register user", error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
     }
 }
 
-
-
 module.exports =    {
                         login,
-                        register
+                        register,
                     }
 

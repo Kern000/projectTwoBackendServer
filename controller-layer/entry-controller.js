@@ -7,7 +7,7 @@ const   {   create: createEntry,                                // 1 argument: d
             retrieveNestedArrayData: retrieveArrayData,         // *Tested, works: 3 arguments: userId, keyOfDataArray, parameterToSortBy
             findItemInNestedArray: retrieveArrayItem,           // *Tested, works: 4 arguments: userId, keyOfDataArray, nestedDataArray, searchItem 
             // deleteNumber2
-            findById: findOne,                                  // Only for testing, user no authorization
+            // findById: findOne,                                  // Only for testing, user no authorization
         } = require("../service-layer/entry-service")
 
 // // only for testing: 
