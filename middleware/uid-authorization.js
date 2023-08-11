@@ -1,24 +1,19 @@
-const express = require('express');
+const firebaseAdmin = require("firebase-admin")
 const httpStatus = require('http-status');
-const { findById:findOne } = require("../service-layer/entry-service")
 
 const checkAccessAuthorization = async (req, res, next) => {
 
-    const userId = req.params.id
-    const headerUid = req.headers.uid             //the Firebase uid that needs to be in the request header
+    const idToken = req.headers.authorization? req.headers.authorization.split(" ")[1] : "";
 
     try {
-        const matchedUser = await findOne(userId)
-        if (!matchedUser) {
-            return res.sendStatus(httpStatus.NOT_FOUND);
-        }
-        if (matchedUser.firebaseUid !== headerUid){
-            return res.sendStatus(httpStatus.UNAUTHORIZED);
-        }
+        await firebaseAdmin.auth().verifyIdToken(idToken);
+        console.log("middleware verified Id Token, authorized access");
+        return res.sendStatus(httpStatus.ACCEPTED);
     } catch (error) {
-        console.error('Error checking authorization with firebase');
+        console.log("Id token verification by middleware failed. Access Rejected", error)
+        return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
     next();
 }
 
-module.exports = checkAccessAuthorization;
+module.exports = {checkAccessAuthorization};

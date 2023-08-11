@@ -1,93 +1,54 @@
 const firebaseAdmin = require("firebase-admin");
-const bcrypt = require('bcrypt');
 const { EntryModel: User } = require('../model-schema');
 
-const register = async (registerData) => {
+const login = async (data) => {
 
-    const {emailAddress, password} = registerData;
+    const {uid, emailAddress, idToken} = data;
 
-    const existingUser = await User.findOne({'emailAddress': emailAddress});
-    
-    if (!existingUser) {
-        try{
-            const saltRounds = 10;
-            const salt = await bcrypt.genSalt(saltRounds);
-            const hashedPassword = await bcrypt.hash(password, salt);
-            
-                try{
-                    firebaseAdmin.auth().createUserWithEmailAndPassword(emailAddress, hashedPassword)
-                    .then((userCredential) => {
-                        const user = userCredential.user;
-                        console.log('New User Authenticated!', user);
-                    })
-                    
-                    try {
-                            const newUser = new User({
-                                'emailAddress':emailAddress, 
-                                'password':hashedPassword, 
-                                'firebaseUid':userCredential.uid
-                            });
-                            await newUser.save();
-                            console.log("new account created");
-                    
-                    } catch (error) {
-                            console.log("Failed to create new account, ", error);
-                    }
+    try{
+        await firebaseAdmin.auth().verifyIdToken(idToken);
+        console.log("Authenticated Valid Token");
 
-                } catch (error) {
-                    console.error('Failed to create token: ', error);
-                }
-
-        } catch (error) {
-            console.log("Failed to hash password, ", error);
+        let existingUser = await User.findOne({uid, emailAddress});
+        if (existingUser) {
+            console.log("Existing User Verified: ", existingUser);
         }
-
-    } else {
-        console.log("Email Address already in use!");
+    } catch (error) {
+        console.error("Error verifying token", error);
+        throw error;
     }
 }
 
-const login = async (loginData) => {
-    
-    const {emailAddress, password, idToken} = loginData;
 
-    //idToken will be supplied from frontend
-    const existingUser = await User.findOne({'emailAddress': emailAddress});
+const register = async (data) => {
 
-    const verifyPassword = async (password, storedHashPassword) => {
-        const match = await bcrypt.compare(password, storedHashPassword)
-        if (match) {
-            return true;
-        } else {
-            console.log("wrong password");
-            return false;
+    const {uid, emailAddress, idToken} = data;
+
+    let existingUser = await User.findOne({uid, emailAddress});
+
+    try {
+
+        await firebaseAdmin.auth().verifyIdToken(idToken);
+        console.log("Authenticated Valid Token");
+
+        if (!existingUser) {
+            existingUser = new User({uid, emailAddress});
+            await existingUser.save();
         }
-    }
-
-    if (existingUser) {
-        const match = verifyPassword(password, existingUser.password)
-        if (match){
-            try{
-                await firebaseAdmin.auth().verifyIdToken(idToken);  //if fail to authenticate, will throw error for catching
-                console.log("Authentication Success!");
-                
-            } catch (error) {          
-                console.log("Authentication Error!", error);
-                throw error;
-            }
-        }
+    } catch (error) {
+        console.error("Error verifying token", error);
+        throw error;
     }
 }
 
-// verifyIdToken will lead to decoded token, where said token includes a firebase generated uid which can be used as authorization header
-// this authentication will still need authorization on the other functions in the server, we will use a middleware for that
+
 
 module.exports= {
-                    register,
-                    login
+                    login,
+                    register
                 };
 
-// In real life, need to send verification email to confirm newUser.;
-// would ask user to confirm their password too;
+// VerifyIdToken will lead to decoded token, where said token includes a firebase generated uid which can be used as authorization header
+// This authentication will still need authorization on the other functions in the server, we will use a middleware for that
+// Previous version, I used Bcrypt to hash password to store inside MongoDb, but decided that it was less secure as I open up another data front for sensitive information. So I decided that userCreation and login will all be handled purely by firebase.
 
-// Front End will handle storing the token generated;

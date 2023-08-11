@@ -24,7 +24,11 @@ const WhiteListSchema = new Schema(
 )
 
 const EntrySchema = new Schema(
-    {
+    {   
+        uid:            {
+                            type: String,
+                            required: true
+                        },
         emailAddress:   {   type: String,
                             unique: [true, 'Email already in use'],
                             lowercase: true,
@@ -36,15 +40,7 @@ const EntrySchema = new Schema(
                                 },
                                 message: props => `${props.value} is not a valid email address!`
                             },
-                            required: [true, 'User phone number required']
-                        },
-        password:       {   type: String,
-                            required: true
-                        },
-        firebaseUid:    {
-                            type: String,
-                            required: true,
-                            unique: true
+                            required: [true, 'User Email Address required']
                         },
         countryCode:    {   type: [String],
                             required: false,
