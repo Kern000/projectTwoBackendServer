@@ -1,12 +1,12 @@
 const httpStatus = require("http-status");
 
 const   {   
-            updateFieldData: updateField,                       // 3 arguments: userId, keyOfField, data
-            addItemToNestedArray: addArrayItem,                 // 3 arguments: userId, keyOfDataArray, data
-            deleteMatchingInNestedArray: deleteArrayItem,       // 3 arguments: userId, keyOfDataArray, itemMatchCondition
-            retrieveNestedArrayData: retrieveArrayData,         // *Tested, works: 3 arguments: userId, keyOfDataArray, parameterToSortBy
-            findItemInNestedArray: retrieveArrayItem,           // *Tested, works: 4 arguments: userId, keyOfDataArray, nestedDataArray, searchItem 
-        } = require("../service-layer/entry-service")
+            updateFieldData: updateField,
+            addItemToNestedArray: addArrayItem,
+            deleteMatchingInNestedArray: deleteArrayItem,
+            retrieveNestedArrayData: retrieveArrayData,
+            findItemInNestedArray: retrieveArrayItem,
+        } = require("../service-layer/entry-service");
 
 const retrieveNestedArray = async (req, res) => {
     try{
@@ -27,9 +27,9 @@ const findItem = async (req, res) => {
         const userId = req.params.id;
         const keyOfDataArray = req.params.keyOfDataArray;
         const nestedDataKey = req.params.nestedDataKey;
-        console.log(userId, keyOfDataArray, nestedDataKey)
+        console.log(userId, keyOfDataArray, nestedDataKey);
         const searchItem = req.query.search;
-        console.log(searchItem)
+        console.log(searchItem);
         
         const foundItems = await retrieveArrayItem(userId, keyOfDataArray, nestedDataKey, searchItem);
         return res.sendStatus(httpStatus.FOUND);
@@ -87,4 +87,4 @@ module.exports= {
                     addToNestedArray,
                     updateProfile,
                     deleteFromNestedArray,
-                }
+                };

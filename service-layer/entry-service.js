@@ -37,7 +37,7 @@ const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, sear
         const matchingItems = nestedArray.filter(item => item[nestedDataKey] === searchItem);
 
         if (!matchingItems){
-            throw new Error("Matching item not found")   
+            throw new Error("Matching item not found");
         }
 
         return matchingItems;
@@ -71,7 +71,6 @@ const updateFieldData = async (userId, keyOfField, data) =>{
                 const savedUser = await foundUser.save();
                 return savedUser;
             } else {
-                
                 throw new Error("User not found");
             }
         } catch (error) {
@@ -96,10 +95,10 @@ const deleteMatchingInNestedArray = async (userId, keyOfDataArray, nestedDataKey
 };
 
 module.exports =    {
+                        findById,
                         retrieveNestedArrayData,
                         findItemInNestedArray,
                         addItemToNestedArray,
                         updateFieldData,
-                        deleteMatchingInNestedArray,
-                        findById,
-                    }
+                        deleteMatchingInNestedArray
+                    };

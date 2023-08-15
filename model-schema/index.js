@@ -11,6 +11,6 @@ const dbConnection = mongoose.connection;
 
 dbConnection.on("error", (err) => console.log(err.message + 'mongo Connection Error'));
 dbConnection.on("connected", () => console.log("mongo connected"));
-dbConnection.on("disconnected", () => console.log("mongo disconnected"))
+dbConnection.on("disconnected", () => console.log("mongo disconnected"));
 
-module.exports = {UserEntryModel}
+module.exports = {UserEntryModel};

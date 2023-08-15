@@ -10,7 +10,7 @@ const BlockedNumberSchema = new Schema(
                             required: true
                         }
     }
-)
+);
 
 const WhiteListSchema = new Schema(
     {
@@ -21,7 +21,7 @@ const WhiteListSchema = new Schema(
                                 required: false
                             }
     }
-)
+);
 
 const UserEntrySchema = new Schema(
     {   
@@ -63,5 +63,4 @@ const UserEntrySchema = new Schema(
     }
 );
 
-
-module.exports = mongoose.model("projectuser", UserEntrySchema)
+module.exports = mongoose.model("projectuser", UserEntrySchema);

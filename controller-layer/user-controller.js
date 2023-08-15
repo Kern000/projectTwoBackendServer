@@ -11,7 +11,7 @@ const login = async (req, res) => {
         return res.sendStatus(httpStatus.ACCEPTED).send(paramsId);
     } catch (error) {
         console.error("Controller failed to login user", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -25,12 +25,12 @@ const register = async (req, res) => {
         return res.sendStatus(httpStatus.ACCEPTED).send(paramsId);
     } catch (error) {
         console.error("Controller failed to register user", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
 module.exports =    {
                         login,
                         register,
-                    }
+                    };
 
