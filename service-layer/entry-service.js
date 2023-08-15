@@ -1,36 +1,27 @@
-const { UserEntryModel: Entry } = require('../model-schema')
+const { Entry } = require('../model-schema');
 
-const findById = async (id) => {
-    try {
-      const entry = await Entry.findById(id);
-      return entry;
-    } catch (error) {
-      throw error;
-    }
-};
-
-const retrieveNestedArrayData = async (userId, formFieldUsingDataArray, parameterToSortBy) => {
+const retrieveNestedArrayData = async (userId, fieldWithDataArrayAsValue, parameterToSortBy) => {
     
         const foundUser = await Entry.findById(
             userId,
-            {[keyOfDataArray]:1}
-        ).sort({[`${keyOfDataArray}.${parameterToSortBy}`]:-1})
+            {[fieldWithDataArrayAsValue]:1}
+        ).sort({[`${fieldWithDataArrayAsValue}.${parameterToSortBy}`]:-1})
         
         if (!foundUser){
             throw new Error("User not found");
-        }       
-        return foundUser[keyOfDataArray];
-}
+        }
+        return foundUser[fieldWithDataArrayAsValue];
+};
 
-const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, searchItem) => {
+const findItemInNestedArray = async (userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem) => {
 
         const foundUser = await Entry.findById(
             userId,
-            {[keyOfDataArray]:1}
+            {[fieldWithDataArrayAsValue]:1}
         )
         
-        const nestedArray = foundUser[keyOfDataArray];
-        const matchingItems = nestedArray.filter(item => item[nestedDataKey] === searchItem);
+        const nestedArray = foundUser[fieldWithDataArrayAsValue];
+        const matchingItems = nestedArray.filter(item => item[nestedObjectKey] === searchItem);
 
         if (!matchingItems){
             throw new Error("Matching item not found");
@@ -38,23 +29,23 @@ const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, sear
         return matchingItems;
 }
 
-const addItemToNestedArray = async (userId, keyOfDataArray, data) => {
+const addItemToNestedArray = async (userId, fieldWithDataArrayAsValue, data) => {
 
         const foundUser = await Entry.findById(userId);
 
         if (foundUser){
-            foundUser[keyOfDataArray].push(data)
+            foundUser[fieldWithDataArrayAsValue].push(data)
             await foundUser.save();
-            return foundUser[keyOfDataArray];
+            return foundUser[fieldWithDataArrayAsValue];
         } else {
             throw new Error("User not found");
         }
 }
 
-const updateFieldData = async (userId, keyOfField, data) =>{
+const updateFieldData = async (userId, field, data) =>{
     let foundUser = await Entry.findById(userId);
         if (foundUser){
-            foundUser[keyOfField] = data[keyOfField]
+            foundUser[field] = data[field]
             const savedUser = await foundUser.save();
             return savedUser;
         } else {
@@ -62,21 +53,20 @@ const updateFieldData = async (userId, keyOfField, data) =>{
         }
 }
 
-const deleteMatchingInNestedArray = async (userId, keyOfDataArray, nestedDataKey, itemMatchCondition) => {
+const deleteMatchingInNestedArray = async (userId, fieldWithDataArrayAsValue, nestedObjectKey, itemMatchCondition) => {
     
     let foundUser = await Entry.findById(userId);
     
         if (foundUser) {
-            foundUser[keyOfDataArray] = foundUser[keyOfDataArray].filter(item => item[nestedDataKey] !== itemMatchCondition);
+            foundUser[fieldWithDataArrayAsValue] = foundUser[fieldWithDataArrayAsValue].filter(item => item[nestedObjectKey] !== itemMatchCondition);
             await foundUser.save();
-            return foundUser[keyOfDataArray];
+            return foundUser[fieldWithDataArrayAsValue];
         } else {
             throw new Error("User not found");
         }
 };
 
 module.exports =    {
-                        findById,
                         retrieveNestedArrayData,
                         findItemInNestedArray,
                         addItemToNestedArray,

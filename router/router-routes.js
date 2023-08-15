@@ -1,29 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-const { updateProfile, 
+const { updateSettings, 
         addToNestedArray,
         deleteFromNestedArray,
         retrieveNestedArray,
         findItemInNestedArray,
       } = require("../controller-layer/entry-controller");
 
-const { login,
-        register
-      } = require("../controller-layer/user-controller");
-
 const { checkAccessAuthorization } = require("../middleware/uid-authorization")
 
 router.use("/:id", checkAccessAuthorization);
 
-router.get("/login", login);
-router.post("/register", register);
-
-router.post("/:id/:keyOfDataArray", addToNestedArray);
-router.get("/:id/:keyOfDataArray", retrieveNestedArray);
-router.get("/:id/:keyOfDataArray/:nestedDataKey",findItemInNestedArray)
-router.patch("/:id/:keyOfField", updateProfile);
-router.patch("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition", deleteFromNestedArray);
+router.post("/:id/:fieldWithDataArrayAsValue", addToNestedArray);
+router.get("/:id/:fieldWithDataArrayAsValue", retrieveNestedArray);
+router.get("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey",findItemInNestedArray)
+router.patch("/:id/:field", updateSettings);
+router.patch("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition", deleteFromNestedArray);
 
 module.exports = {router};
 

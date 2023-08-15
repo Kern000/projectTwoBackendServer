@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {login: loginUser, register: registerUser} = require('../service-layer/login-authentication-service');
+const {login:loginUser, register:registerUser} = require('../service-layer/user-service');
 
 const login = async (req, res) => {
     const {emailAddress} = req.body;

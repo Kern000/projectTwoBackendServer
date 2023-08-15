@@ -1,5 +1,6 @@
 const mongoose= require("mongoose");
-const UserEntryModel = require("./user-schema");
+const Entry = require("./entry-schema");
+const User = require("./user-schema");
 
 const mongoURI = process.env.MONGO_URL;
 const dbConnection = mongoose.connection;
@@ -13,4 +14,7 @@ dbConnection.on("error", (err) => console.log(err.message + 'mongo Connection Er
 dbConnection.on("connected", () => console.log("mongo connected"));
 dbConnection.on("disconnected", () => console.log("mongo disconnected"));
 
-module.exports = {UserEntryModel};
+module.exports =    {  
+                        Entry, 
+                        User
+                    };

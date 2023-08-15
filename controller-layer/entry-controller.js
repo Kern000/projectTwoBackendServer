@@ -11,10 +11,10 @@ const   {
 const retrieveNestedArray = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfDataArray = req.params.keyOfDataArray;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
         const parameterToSortBy = 'timeStamp';
 
-        await retrieveArrayData(userId, keyOfDataArray, parameterToSortBy);
+        await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
         return res.sendStatus(httpStatus.OK);
     } catch (error) {
         console.log("Fail to retrieve data", error);
@@ -25,11 +25,11 @@ const retrieveNestedArray = async (req, res) => {
 const findItemInNestedArray = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfDataArray = req.params.keyOfDataArray;
-        const nestedDataKey = req.params.nestedDataKey;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
+        const nestedObjectKey = req.params.nestedObjectKey;
         const searchItem = req.query.search;
         
-        await retrieveArrayItem(userId, keyOfDataArray, nestedDataKey, searchItem);
+        await retrieveArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem);
         return res.sendStatus(httpStatus.FOUND);
  
     } catch (error) {
@@ -41,10 +41,10 @@ const findItemInNestedArray = async (req, res) => {
 const addToNestedArray = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfDataArray = req.params.keyOfDataArray;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
         let data = req.body;
 
-        await addArrayItem(userId, keyOfDataArray, data);
+        await addArrayItem(userId, fieldWithDataArrayAsValue, data);
         return res.sendStatus(httpStatus.OK);
 
     } catch (error) {
@@ -54,12 +54,12 @@ const addToNestedArray = async (req, res) => {
     }
 }
 
-const updateProfile = async (req, res) => {
+const updateSettings = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfField = req.params.keyOfField;
+        const field = req.params.field;
         let data = req.body;
-        await updateField(userId, keyOfField, data);
+        await updateField(userId, field, data);
         return res.sendStatus(httpStatus.OK);
 
     } catch (error) {
@@ -72,11 +72,11 @@ const updateProfile = async (req, res) => {
 const deleteFromNestedArray = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfDataArray = req.params.keyOfDataArray;
-        const nestedDataKey = req.params.nestedDataKey;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
+        const nestedObjectKey = req.params.nestedObjectKey;
         const itemMatchCondition = req.params.itemMatchCondition;
 
-        await deleteArrayItem(userId, keyOfDataArray, nestedDataKey, itemMatchCondition);
+        await deleteArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, itemMatchCondition);
         return res.sendStatus(httpStatus.ACCEPTED);
 
     } catch (error) {
@@ -90,6 +90,6 @@ module.exports= {
                     retrieveNestedArray,
                     findItemInNestedArray,
                     addToNestedArray,
-                    updateProfile,
+                    updateSettings,
                     deleteFromNestedArray,
                 };

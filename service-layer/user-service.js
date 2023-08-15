@@ -1,5 +1,6 @@
 const firebaseAdmin = require("firebase-admin");
-const { UserEntryModel: User } = require('../model-schema');
+const { User } = require('../model-schema');
+const { Entry } = require('../model-schema');
 
 const login = async (data) => {
 
@@ -13,11 +14,13 @@ const login = async (data) => {
         if (existingUser) {
             console.log("Existing User Verified: ", existingUser);
 
-            const fetchParamsId = existingUser._id.toString();
+            const userEntry = await Entry.findOne({user: existingUser._id})
+
+            const fetchParamsId = userEntry._id.toString();
             return fetchParamsId;
         }
     } catch (error) {
-        console.error("Error verifying token", error);
+        console.error("Error verifying token, failed login", error);
         throw error;
     }
 }
@@ -36,11 +39,15 @@ const register = async (data) => {
         if (!existingUser) {
             existingUser = new User({uid, emailAddress});
             await existingUser.save();
-            const fetchParamsId = existingUser._id.toString()
+
+            let newEntry = new Entry({user: existingUser._id});
+            await newEntry.save();
+
+            const fetchParamsId = newEntry._id.toString()
             return fetchParamsId
         }
     } catch (error) {
-        console.error("Error verifying token", error);
+        console.error("Error verifying token, failed registration", error);
         throw error;
     }
 }
