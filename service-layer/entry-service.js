@@ -9,8 +9,8 @@ const findById = async (id) => {
     }
 };
 
-const retrieveNestedArrayData = async (userId, keyOfDataArray, parameterToSortBy) => {
-    try{
+const retrieveNestedArrayData = async (userId, formFieldUsingDataArray, parameterToSortBy) => {
+    
         const foundUser = await Entry.findById(
             userId,
             {[keyOfDataArray]:1}
@@ -20,14 +20,10 @@ const retrieveNestedArrayData = async (userId, keyOfDataArray, parameterToSortBy
             throw new Error("User not found");
         }       
         return foundUser[keyOfDataArray];
-
-    } catch (error){
-        throw error;
-    }
 }
 
 const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, searchItem) => {
-    try{
+
         const foundUser = await Entry.findById(
             userId,
             {[keyOfDataArray]:1}
@@ -39,16 +35,11 @@ const findItemInNestedArray = async (userId, keyOfDataArray, nestedDataKey, sear
         if (!matchingItems){
             throw new Error("Matching item not found");
         }
-
         return matchingItems;
-
-    } catch (error){
-        throw error;
-    }
 }
 
 const addItemToNestedArray = async (userId, keyOfDataArray, data) => {
-    try{
+
         const foundUser = await Entry.findById(userId);
 
         if (foundUser){
@@ -58,40 +49,30 @@ const addItemToNestedArray = async (userId, keyOfDataArray, data) => {
         } else {
             throw new Error("User not found");
         }
-    } catch (error) {
-        throw error;
-    }
 }
 
 const updateFieldData = async (userId, keyOfField, data) =>{
-    try{
-        let foundUser = await Entry.findById(userId);
-            if (foundUser){
-                foundUser[keyOfField] = data[keyOfField]
-                const savedUser = await foundUser.save();
-                return savedUser;
-            } else {
-                throw new Error("User not found");
-            }
-        } catch (error) {
-            throw new error;
+    let foundUser = await Entry.findById(userId);
+        if (foundUser){
+            foundUser[keyOfField] = data[keyOfField]
+            const savedUser = await foundUser.save();
+            return savedUser;
+        } else {
+            throw new Error("User not found");
         }
 }
 
 const deleteMatchingInNestedArray = async (userId, keyOfDataArray, nestedDataKey, itemMatchCondition) => {
-    try{
-        let foundUser = await Entry.findById(userId);
-        
-              if (foundUser) {
-                foundUser[keyOfDataArray] = foundUser[keyOfDataArray].filter(item => item[nestedDataKey] !== itemMatchCondition);
-                await foundUser.save();
-                return foundUser[keyOfDataArray];
-              } else {
-                throw new Error("User not found");
-              }
-    } catch (error) {
-        throw error;
-    }
+    
+    let foundUser = await Entry.findById(userId);
+    
+        if (foundUser) {
+            foundUser[keyOfDataArray] = foundUser[keyOfDataArray].filter(item => item[nestedDataKey] !== itemMatchCondition);
+            await foundUser.save();
+            return foundUser[keyOfDataArray];
+        } else {
+            throw new Error("User not found");
+        }
 };
 
 module.exports =    {

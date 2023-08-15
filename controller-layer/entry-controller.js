@@ -11,10 +11,10 @@ const   {
 const retrieveNestedArray = async (req, res) => {
     try{
         const userId = req.params.id;
-        const keyOfDataArray = req.params.keyOfDataArray;
+        const keyOfObjectNestedInDataArray = req.params.keyOfDataArray;
         const parameterToSortBy = 'timeStamp';
 
-        const foundItems= await retrieveArrayData(userId, keyOfDataArray, parameterToSortBy);
+        await retrieveArrayData(userId, keyOfObjectNestedInDataArray, parameterToSortBy);
         return res.sendStatus(httpStatus.OK);
     } catch (error) {
         console.log("Fail to retrieve data", error);
