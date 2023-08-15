@@ -10,11 +10,3 @@ server.use(express.json());
 server.use("/user", userRoute);
 
 server.listen(port, ()=> console.log(`Server is listening to port: ${port}`));
-
-
-
-
-
-
-// cors is imported for browser based application.
-// server.use (all routes 
