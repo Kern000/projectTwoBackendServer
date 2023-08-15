@@ -5,7 +5,7 @@ const { updateProfile,
         addToNestedArray,
         deleteFromNestedArray,
         retrieveNestedArray,
-        findItem,
+        findItemInNestedArray,
       } = require("../controller-layer/entry-controller");
 
 const { login,
@@ -21,7 +21,7 @@ router.post("/register", register);
 
 router.post("/:id/:keyOfDataArray", addToNestedArray);
 router.get("/:id/:keyOfDataArray", retrieveNestedArray);
-router.get("/:id/:keyOfDataArray/:nestedDataKey",findItem)
+router.get("/:id/:keyOfDataArray/:nestedDataKey",findItemInNestedArray)
 router.patch("/:id/:keyOfField", updateProfile);
 router.patch("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition", deleteFromNestedArray);
 
