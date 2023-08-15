@@ -24,11 +24,11 @@ router.use("/:id", checkAccessAuthorization);  //all user related will check Acc
 
 router.get("/login", login);
 router.post("/register", register);
-router.post("/", createProfile);      //only for admin purposes, both user creation of account and login is in the login path
+// router.post("/", createProfile);      //only for admin purposes, both user creation of account and login is in the login path
 
-router.post("/:id/:keyOfDataArray/add", addToNestedArray);
-router.get("/:id/:keyOfDataArray/find-all", retrieveNestedArray);
-router.get("/:id/:keyOfDataArray/:nestedDataKey/search",findItem)
+router.post("/:id/:keyOfDataArray", addToNestedArray);
+router.get("/:id/:keyOfDataArray", retrieveNestedArray);
+router.get("/:id/:keyOfDataArray/:nestedDataKey",findItem)
 router.patch("/:id/:keyOfField", updateProfile);
 router.patch("/:id/:keyOfDataArray/:nestedDataKey/:itemMatchCondition/delete", deleteFromNestedArray);
 

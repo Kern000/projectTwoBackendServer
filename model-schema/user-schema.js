@@ -42,7 +42,7 @@ const EntrySchema = new Schema(
                             },
                             required: [true, 'User Email Address required']
                         },
-        countryCode:    {   type: [String],
+        countryCode:    {   type: [],
                             required: false,
                         },
         hpNumber:       {   type: String,

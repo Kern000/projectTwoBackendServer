@@ -27,15 +27,15 @@ const   {   create: createEntry,                                // 1 argument: d
 
 // Tested functions are below //
 
-const createProfile = async (req, res) => {
-    try{
-        await createEntry(req.body);
-        return res.sendStatus(httpStatus.CREATED);
-    } catch (error) {
-        console.log("Profile creation failed", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
-}
+// const createProfile = async (req, res) => {
+//     try{
+//         await createEntry(req.body);
+//         return res.sendStatus(httpStatus.CREATED);
+//     } catch (error) {
+//         console.log("Profile creation failed", error);
+//         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+//     }
+// }
 
 const retrieveNestedArray = async (req, res) => {
     try{
@@ -119,7 +119,7 @@ const deleteFromNestedArray = async (req, res) => {
 }
 
 module.exports= {
-                    createProfile,
+                    // createProfile,
                     retrieveNestedArray,
                     findItem,
                     addToNestedArray,

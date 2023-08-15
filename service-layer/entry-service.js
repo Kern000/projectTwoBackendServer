@@ -82,15 +82,15 @@ const updateFieldData = async (userId, keyOfField, data) =>{
     try{
         let foundUser = await EntryModel.findById(userId);
             if (foundUser){
-                let foundKey = foundUser.hasOwnProperty(keyOfField)
                 foundUser[keyOfField] = data[keyOfField]
                 const savedUser = await foundUser.save();
                 return savedUser;
             } else {
-            throw new Error("User not found");
+                
+                throw new Error("User not found");
             }
         } catch (error) {
-            throw error;
+            throw new error;
         }
 }
 // cannot do like normal object to use {...object, data}, because it will not be a Mongo Document, it will just be an object
