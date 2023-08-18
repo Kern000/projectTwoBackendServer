@@ -23,6 +23,17 @@ const WhiteListSchema = new Schema(
     }
 );
 
+const CountryCodeSchema = new Schema(
+    {
+        code:               {   type: String,
+                                require: false,
+                            },
+        timeStamp:          {   type: Date,
+                                required: false
+                            }
+    }
+);
+
 const EntrySchema = new Schema(
     {   
         user:            {
@@ -30,7 +41,7 @@ const EntrySchema = new Schema(
                             ref: "User",
                             required: true
                         },
-        countryCode:    {   type: [],
+        countryCode:    {   type: [CountryCodeSchema],
                             required: false,
                         },
         hpNumber:       {   type: String,

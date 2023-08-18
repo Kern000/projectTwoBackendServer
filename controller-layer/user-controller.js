@@ -19,10 +19,10 @@ const register = async (req, res) => {
     const {emailAddress} = req.body;
     const uid = req.headers.uid;
     const idToken = req.headers.authorization? req.headers.authorization.split(" ")[1] : "";
-    
+
     try{
-        const paramsId = await registerUser({uid, emailAddress, idToken})
-        return res.sendStatus(httpStatus.ACCEPTED).send(paramsId);
+        const paramsId = await registerUser({'uid':uid, 'emailAddress': emailAddress, 'idToken': idToken})
+        return res.status(400).send(paramsId);
     } catch (error) {
         console.error("Controller failed to register user", error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
