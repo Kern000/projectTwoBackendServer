@@ -4,13 +4,13 @@ const { Entry } = require('../model-schema');
 
 const login = async (data) => {
 
-    const {uid, emailAddress, idToken} = data;
+    const {emailAddress, idToken} = data;
 
     try{
         await firebaseAdmin.auth().verifyIdToken(idToken);
         console.log("Authenticated Valid Token");
 
-        let existingUser = await User.findOne({'uid':uid, 'emailAddress':emailAddress});
+        let existingUser = await User.findOne({'emailAddress':emailAddress});
         if (existingUser) {
             console.log("Existing User Verified: ", existingUser);
 
@@ -27,9 +27,9 @@ const login = async (data) => {
 
 const register = async (data) => {
 
-    const {uid, emailAddress, idToken} = data;
+    const {emailAddress, idToken} = data;
 
-    let existingUser = await User.findOne({'uid':uid, 'emailAddress': emailAddress});
+    let existingUser = await User.findOne({'emailAddress':emailAddress});
 
     try {
 
@@ -37,7 +37,7 @@ const register = async (data) => {
         console.log("Authenticated Valid Token");
 
         if (!existingUser) {
-            existingUser = new User({'uid':uid, 'emailAddress':emailAddress});
+            existingUser = new User({'emailAddress':emailAddress});
             await existingUser.save();
 
             let newEntry = new Entry({user: existingUser._id});

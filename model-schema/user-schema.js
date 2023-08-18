@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
     {
-        uid:            {
-                            type: String,
-                            required: true
-        },
         emailAddress:   {   type: String,
                             unique: [true, 'Email already in use'],
                             lowercase: true,
