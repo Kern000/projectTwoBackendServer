@@ -15,11 +15,13 @@ const retrieveNestedArrayData = async (userId, fieldWithDataArrayAsValue, parame
 
 const findItemInNestedArray = async (userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem) => {
 
+        console.log(userId)
         const foundUser = await Entry.findById(
             userId,
             {[fieldWithDataArrayAsValue]:1}
         )
-        
+        console.log(foundUser)
+
         const nestedArray = foundUser[fieldWithDataArrayAsValue];
         const matchingItems = nestedArray.filter(item => item[nestedObjectKey] === searchItem);
 
@@ -31,7 +33,9 @@ const findItemInNestedArray = async (userId, fieldWithDataArrayAsValue, nestedOb
 
 const addItemToNestedArray = async (userId, fieldWithDataArrayAsValue, data) => {
 
+        console.log(userId)
         const foundUser = await Entry.findById(userId);
+        console.log(foundUser)
 
         if (foundUser){
             foundUser[fieldWithDataArrayAsValue].push(data)

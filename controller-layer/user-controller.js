@@ -2,11 +2,14 @@ const httpStatus = require('http-status');
 const {login:loginUser, register:registerUser} = require('../service-layer/user-service');
 
 const login = async (req, res) => {
+
     const {emailAddress} = req.body;
     const idToken = req.headers.authorization? req.headers.authorization.split(" ")[1] : "";
     
     try{
-        const paramsId = await loginUser({emailAddress, idToken})
+        const paramsId = await loginUser({'emailAddress': emailAddress, 'idToken': idToken})
+        console.log(paramsId)
+        console.log('user controller success')
         return res.status(200).send(paramsId);
     } catch (error) {
         console.error("Controller failed to login user", error);
@@ -32,4 +35,3 @@ module.exports =    {
                         login,
                         register,
                     };
-

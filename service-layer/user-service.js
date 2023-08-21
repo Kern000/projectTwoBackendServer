@@ -4,19 +4,21 @@ const { Entry } = require('../model-schema');
 
 const login = async (data) => {
 
+    console.log('datafirst', data);
     const {emailAddress, idToken} = data;
 
+    console.log('data=>', emailAddress)
     try{
         await firebaseAdmin.auth().verifyIdToken(idToken);
         console.log("Authenticated Valid Token");
 
-        let existingUser = await User.findOne({'emailAddress':emailAddress});
+        let existingUser = await User.findOne({'emailAddress':emailAddress})
+        console.log('login service ExistingUser =>', existingUser)
+
         if (existingUser) {
-            console.log("Existing User Verified: ", existingUser);
 
-            const userEntry = await Entry.findOne({'user': existingUser._id})
-
-            const fetchParamsId = userEntry._id.toString();
+            const fetchParamsId = existingUser.id
+            console.log('login service fetchparamsid:', fetchParamsId)
             return fetchParamsId;
         }
     } catch (error) {
@@ -39,11 +41,10 @@ const register = async (data) => {
         if (!existingUser) {
             existingUser = new User({'emailAddress':emailAddress});
             await existingUser.save();
-
             let newEntry = new Entry({user: existingUser._id});
             await newEntry.save();
-
             const fetchParamsId = newEntry._id.toString()
+            console.log(fetchParamsId)
             return fetchParamsId
         }
     } catch (error) {

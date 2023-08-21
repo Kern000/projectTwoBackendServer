@@ -9,6 +9,7 @@ const   {
         } = require("../service-layer/entry-service");
 
 const retrieveNestedArray = async (req, res) => {
+    console.log("retrieveNestedArray route called")
     try{
         const userId = req.params.id;
         const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
@@ -48,17 +49,20 @@ const addToNestedArray = async (req, res) => {
         return res.sendStatus(httpStatus.OK);
 
     } catch (error) {
-
         console.log("Failed to add data", error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
 const updateSettings = async (req, res) => {
+    console.log("updateSettings method called")
     try{
         const userId = req.params.id;
+        console.log(userId)
         const field = req.params.field;
+        console.log(field)
         let data = req.body;
+        console.log(data)
         await updateField(userId, field, data);
         return res.sendStatus(httpStatus.OK);
 
