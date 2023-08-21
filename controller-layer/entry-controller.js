@@ -58,11 +58,8 @@ const updateSettings = async (req, res) => {
     console.log("updateSettings method called")
     try{
         const userId = req.params.id;
-        console.log(userId)
         const field = req.params.field;
-        console.log(field)
         let data = req.body;
-        console.log(data)
         await updateField(userId, field, data);
         return res.sendStatus(httpStatus.OK);
 
