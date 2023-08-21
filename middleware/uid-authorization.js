@@ -8,12 +8,11 @@ const checkAccessAuthorization = async (req, res, next) => {
     try {
         await firebaseAdmin.auth().verifyIdToken(idToken);
         console.log("middleware verified Id Token, authorized access");
-        return res.sendStatus(httpStatus.ACCEPTED);
+        next();
     } catch (error) {
         console.log("Id token verification by middleware failed. Access Rejected", error)
         return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
-    next();
 }
 
 module.exports = {checkAccessAuthorization};
