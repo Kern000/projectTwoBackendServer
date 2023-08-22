@@ -17,8 +17,10 @@ const login = async (data) => {
 
         if (existingUser) {
 
-            const fetchParamsId = existingUser.id
+            let entryData = await Entry.findOne({user: existingUser._id});
+            const fetchParamsId = entryData.id            
             console.log('login service fetchparamsid:', fetchParamsId)
+
             return fetchParamsId;
         }
     } catch (error) {
