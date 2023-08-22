@@ -15,8 +15,8 @@ const retrieveNestedArray = async (req, res) => {
         const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
         const parameterToSortBy = 'timeStamp';
 
-        await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
-        return res.sendStatus(httpStatus.OK);
+        let retrievedData = await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
+        return res.send(retrievedData);
     } catch (error) {
         console.log("Fail to retrieve data", error);
         return res.sendStatus(httpStatus.NOT_FOUND);
@@ -30,8 +30,8 @@ const findItemInNestedArray = async (req, res) => {
         const nestedObjectKey = req.params.nestedObjectKey;
         const searchItem = req.query.search;
         
-        await retrieveArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem);
-        return res.sendStatus(httpStatus.FOUND);
+        let matchedItem = await retrieveArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem);
+        return res.send(matchedItem);
  
     } catch (error) {
         console.log("Failed to find item", error);
