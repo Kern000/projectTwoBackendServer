@@ -3,9 +3,11 @@ This express backend server tests the feasibility of refactoring as much code as
 
 <h2> Routes showcase </h2>
 
-<h4> Retrieving a nested array from data structure </h4>
-Get Route
-https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+<div style="border: 1px solid #ccc; padding: 10px;">
+  <h4> Retrieving a nested array from data structure </h4>
+  Get Route
+  https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+</div>
 
 <h4> Finding an Item in a nested array </h4>
 GET Route
