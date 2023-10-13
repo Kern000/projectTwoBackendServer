@@ -7,20 +7,12 @@ This express backend server tests the feasibility of refactoring as much code as
 | ---------------------------------------------------------                            |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 | 2. Finding an Item in a nested array: GET Route |
-| --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey |
 | 3. Adding an Item into a nested array: GET Route |
-| --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
-
-
 | 4. Updating a non-nested field (non-array): PATCH Route |
-| --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:field |
-
-
 | 5. Deleting from a nested array: PATCH Route |
-| --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition |
 
 
