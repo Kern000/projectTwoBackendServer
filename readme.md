@@ -6,7 +6,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> 1. Retrieving a nested array from data structure: </h4> GET Route</th>
+      <th><h4> 1. Retrieving a nested array from data structure: GET Route </h4> </th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +21,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Finding an Item in a nested array: </h4> GET Route</th>
+      <th><h4> 2. Finding an Item in a nested array: GET Route</h4> </th>
     </tr>
   </thead>
   <tbody>
@@ -37,7 +37,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Adding an Item into a nested array: </h4> GET Route</th>
+      <th><h4> 3. Adding an Item into a nested array: GET Route</h4> </th>
     </tr>
   </thead>
   <tbody>
@@ -52,7 +52,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Updating a non-nested field (non-array): </h4> PATCH ROUTE</th>
+      <th><h4> 4. Updating a non-nested field (non-array): PATCH ROUTE</h4> </th>
     </tr>
   </thead>
   <tbody>
@@ -67,7 +67,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Deleting from a nested array: </h4> PATCH Route </th>
+      <th><h4> 5. Deleting from a nested array: PATCH Route </h4></th>
     </tr>
   </thead>
   <tbody>
