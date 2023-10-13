@@ -79,7 +79,7 @@ This express backend server tests the feasibility of refactoring as much code as
   </tbody>
 </table>
 
-All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key within the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
+All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key in at the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
 
 <h4> Search </h4>
 
