@@ -3,8 +3,8 @@ This express backend server tests the feasibility of refactoring as much code as
 
 <h2> Routes showcase </h2>
 
-| 1. Retrieving a nested array from a data structure: GET Route |
-| --------------------------------------------------------- |
+| 1. Retrieving a nested array from a data structure: GET Route                        |
+| ---------------------------------------------------------                            |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 
 
