@@ -6,16 +6,13 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> 1. Retrieving a nested array from data structure </h4></th>
-      <th>Get Route</th>
+      <th><h4> 1. Retrieving a nested array from data structure: </h4> GET Route</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
-      </td>
-      <td>
       </td>
     </tr>    
   </tbody>
@@ -24,8 +21,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Finding an Item in a nested array </h4></th>
-      <th>Get Route</th>
+      <th><h4> Finding an Item in a nested array: </h4> GET Route</th>
     </tr>
   </thead>
   <tbody>
@@ -33,8 +29,6 @@ This express backend server tests the feasibility of refactoring as much code as
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey
       </td>
-      <td>
-      </td>
     </tr>    
   </tbody>
 </table>
@@ -43,8 +37,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Adding an Item into a nested array </h4></th>
-      <th>Get Route</th>
+      <th><h4> Adding an Item into a nested array: </h4> GET Route</th>
     </tr>
   </thead>
   <tbody>
@@ -52,8 +45,6 @@ This express backend server tests the feasibility of refactoring as much code as
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
       </td>
-      <td>
-      </td>
     </tr>    
   </tbody>
 </table>
@@ -61,8 +52,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Updating a non-nested field (non-array) </h4></th>
-      <th>PATCH Route</th>
+      <th><h4> Updating a non-nested field (non-array): </h4> PATCH ROUTE</th>
     </tr>
   </thead>
   <tbody>
@@ -70,8 +60,6 @@ This express backend server tests the feasibility of refactoring as much code as
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:field
       </td>
-      <td>
-      </td>
     </tr>    
   </tbody>
 </table>
@@ -79,16 +67,13 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> Deleting from a nested array </h4></th>
-      <th>PATCH Route</th>
+      <th><h4> Deleting from a nested array: </h4> PATCH Route </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition
-      </td>
-      <td>
       </td>
     </tr>    
   </tbody>
