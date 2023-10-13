@@ -3,7 +3,7 @@ This express backend server tests the feasibility of refactoring as much code as
 
 <h2> Routes showcase </h2>
 
-<div style="border: 1px solid #ccc; padding: 10px;">
+<div style="border: '1px solid black'; padding: '10px'; background-color: 'gray'">
   <h4> Retrieving a nested array from data structure </h4>
   Get Route
   https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
