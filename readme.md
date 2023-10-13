@@ -6,28 +6,28 @@ This express backend server tests the feasibility of refactoring as much code as
 | 1. Retrieving a nested array from a data structure: GET Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
-<br />
-<br />
+
+
 | 2. Finding an Item in a nested array: GET Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey |
-<br />
-<br />
+
+
 | 3. Adding an Item into a nested array: GET Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
-<br />
-<br />
+
+
 | 4. Updating a non-nested field (non-array): PATCH Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:field |
-<br />
-<br />
+
+
 | 5. Deleting from a nested array: PATCH Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition |
-<br />
-<br />
+
+
 All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key in at the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
 
 <h4> Search </h4>
