@@ -15,11 +15,18 @@ const retrieveNestedArray = async (req, res) => {
         const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
         const parameterToSortBy = 'timeStamp';
 
-        let retrievedData = await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
-        return res.send(retrievedData);
+        try{
+            let retrievedData = await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
+            return res.status(201).send(retrievedData);
+
+        } catch (error) {
+            console.log('Fail to retrieve data')
+            res.status(500).send("Internal Server Error")
+        }
+
     } catch (error) {
-        console.log("Fail to retrieve data", error);
-        return res.sendStatus(httpStatus.NOT_FOUND);
+        console.log("Bad Url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
 
@@ -30,12 +37,15 @@ const findItemInNestedArray = async (req, res) => {
         const nestedObjectKey = req.params.nestedObjectKey;
         const searchItem = req.query.search;
         
-        let matchedItem = await retrieveArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem);
-        return res.send(matchedItem);
- 
+        try {
+            let matchedItem = await retrieveArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, searchItem);
+            return res.status(201).send(matchedItem);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
     } catch (error) {
-        console.log("Failed to find item", error);
-        return res.sendStatus(httpStatus.NOT_FOUND);
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
 
@@ -44,13 +54,17 @@ const addToNestedArray = async (req, res) => {
         const userId = req.params.id;
         const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
         let data = req.body;
+        try{
+            await addArrayItem(userId, fieldWithDataArrayAsValue, data);
+            return res.sendStatus(httpStatus.OK);
 
-        await addArrayItem(userId, fieldWithDataArrayAsValue, data);
-        return res.sendStatus(httpStatus.OK);
-
+        } catch (error){
+            console.log('Fail to add to nested array', error)
+            res.status(400).send('Bad request');
+        }
     } catch (error) {
-        console.log("Failed to add data", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
 
@@ -60,13 +74,17 @@ const updateSettings = async (req, res) => {
         const userId = req.params.id;
         const field = req.params.field;
         let data = req.body;
-        await updateField(userId, field, data);
-        return res.sendStatus(httpStatus.OK);
+        try {
+            await updateField(userId, field, data);
+            return res.sendStatus(httpStatus.ACCEPTED);
+        } catch (error) {
+            console.log('Failed to update settings field', error);
+            res.status(500).send("Internal Server Error")
+        }
 
     } catch (error) {
-
-        console.log("Settings update failed", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
 
@@ -77,13 +95,16 @@ const deleteFromNestedArray = async (req, res) => {
         const nestedObjectKey = req.params.nestedObjectKey;
         const itemMatchCondition = req.params.itemMatchCondition;
 
-        await deleteArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, itemMatchCondition);
-        return res.sendStatus(httpStatus.ACCEPTED);
-
+        try {
+            await deleteArrayItem(userId, fieldWithDataArrayAsValue, nestedObjectKey, itemMatchCondition);
+            return res.sendStatus(httpStatus.ACCEPTED);
+        } catch (error) {
+            res.status(500).send("Internal Server Error")            
+        }
     } catch (error) {
 
-        console.log("Failed to delete item", error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
 

@@ -8,6 +8,8 @@ const port = process.env.PORT || 3001;
 
 server.use(cors());
 server.use(express.json());
+
+
 server.use("/entry", entryRoute);
 
 server.post("/user/login", login);
