@@ -5,7 +5,7 @@ This express backend server tests the feasibility of refactoring as much code as
 
 | 1. Retrieving a nested array from a data structure: GET Route |
 | --------------------------------------------------------- |
-| [https://project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue](https://project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue) |
+| https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 
 <table>
   <thead>
