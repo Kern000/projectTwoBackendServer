@@ -28,6 +28,7 @@ All routes go through an id authentication through firebase. This means that use
 <h4> Search </h4>
 Search capabilities include:
 | Database | Search Type |
+| -------- | -------- |
 | Mongoose find() | Exact Number Search |
 | $eq | First digit equals |
 | $gt | First digit greater than |
