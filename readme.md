@@ -30,7 +30,7 @@ Search capabilities include:
 <table>
   <thead>
     <tr>
-      <th>Database</th>
+      <th>Database syntax</th>
       <th>Search Type</th>
     </tr>
   </thead>
