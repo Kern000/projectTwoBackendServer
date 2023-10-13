@@ -5,8 +5,8 @@ This express backend server tests the feasibility of refactoring as much code as
 
 <div style="border: '1px solid black'; padding: '10px'; background-color: 'gray'">
   <h4> Retrieving a nested array from data structure </h4>
-  Get Route
-  https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+  <p> Get Route <p>
+  <p> https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue <p>
 </div>
 
 <h4> Finding an Item in a nested array </h4>
@@ -28,7 +28,7 @@ https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsV
 All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key within the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
 
 <h4> Search </h4>
-Search capabilities include:
+
 <table>
   <thead>
     <tr>
@@ -57,10 +57,13 @@ Search capabilities include:
 </table>
 
 <H2> Technologies used </H2>
+
 Express, joi, cors, http-status, mongoose, nodemon, yarn, firebase-admin
 
 <H2> Testing </H2>
+
 Testing done through YARC and live testing on expo.
 
 <h2> External source code/ assets/ media </h2>
+
 N/a
