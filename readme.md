@@ -1,10 +1,9 @@
 <h2> Rationale and Context </h2>
 This express backend server tests the feasibility of refactoring as much code as possible, and the use of generic methods and routes as much as possible. Controller and Mongoose model were constructed based on data structure rather than the actual context needs. This allowed the controller routes to be streamlined to a mere handful of routes. This highlights the reusability of codes. However, the limitation is that the route methods can seem abstract and the user require intimate knowledge of the data structure. This server presents a possible alternative, albeit unorthodox, where data is handled in a factory like manner.
 
-<h2> Routes showcase </h2>
-
-| 1. Retrieving a nested array from a data structure: GET Route                        |
+| Routes showcase                       |
 | ---------------------------------------------------------                            |
+| 1. Retrieving a nested array from a data structure: GET Route |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 | 2. Finding an Item in a nested array: GET Route |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey |
