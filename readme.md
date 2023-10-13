@@ -27,12 +27,32 @@ All routes go through an id authentication through firebase. This means that use
 
 <h4> Search </h4>
 Search capabilities include:
-| Database | Search Type |
-| -------- | -------- |
-| Mongoose find() | Exact Number Search |
-| $eq | First digit equals |
-| $gt | First digit greater than |
-| $lt | First digit less than |
+<table>
+  <thead>
+    <tr>
+      <th>Database</th>
+      <th>Search Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mongoose find()</td>
+      <td>Exact Number Search</td>
+    </tr>
+    <tr>
+      <td>$eq</td>
+      <td>First digit equals</td>
+    </tr>
+    <tr>
+      <td>$gt</td>
+      <td>First digit greater than</td>
+    </tr>
+    <tr>
+      <td>$lt</td>
+      <td>First digit less than</td>
+    </tr>
+  </tbody>
+</table>
 
 <H2> Technologies used </H2>
 Express, joi, cors, http-status, mongoose, nodemon, yarn, firebase-admin
