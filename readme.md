@@ -6,13 +6,9 @@ This express backend server tests the feasibility of refactoring as much code as
 | 1. Retrieving a nested array from a data structure: GET Route                        |
 | ---------------------------------------------------------                            |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
-
-
 | 2. Finding an Item in a nested array: GET Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey |
-
-
 | 3. Adding an Item into a nested array: GET Route |
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
