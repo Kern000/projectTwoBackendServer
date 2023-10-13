@@ -15,26 +15,84 @@ This express backend server tests the feasibility of refactoring as much code as
       <td>
         https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
       </td>
+      <td>
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th><h4> Finding an Item in a nested array </h4></th>
+      <th>Get Route</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey
+      </td>
+      <td>
+      </td>
     </tr>    
   </tbody>
 </table>
 
 
-<h4> Finding an Item in a nested array </h4>
-GET Route
-https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey
+<table>
+  <thead>
+    <tr>
+      <th><h4> Adding an Item into a nested array </h4></th>
+      <th>Get Route</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+      </td>
+      <td>
+      </td>
+    </tr>    
+  </tbody>
+</table>
 
-<h4> Adding an Item into a nested array </h4>
-GET Route
-https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+<table>
+  <thead>
+    <tr>
+      <th><h4> Updating a non-nested field (non-array) </h4></th>
+      <th>PATCH Route</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        https://<span></span>project-two-backend.onrender.com/:id/:field
+      </td>
+      <td>
+      </td>
+    </tr>    
+  </tbody>
+</table>
 
-<h4> Updating a non-nested field (non-array) </h4>
-PATCH Route
-https://<span></span>project-two-backend.onrender.com/:id/:field
-
-<h4> Deleting from a nested array </h4>
-PATCH Route
-https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition
+<table>
+  <thead>
+    <tr>
+      <th><h4> Deleting from a nested array </h4></th>
+      <th>PATCH Route</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition
+      </td>
+      <td>
+      </td>
+    </tr>    
+  </tbody>
+</table>
 
 All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key within the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
 
