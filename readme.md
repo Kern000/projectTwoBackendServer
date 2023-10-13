@@ -7,81 +7,21 @@ This express backend server tests the feasibility of refactoring as much code as
 | --------------------------------------------------------- |
 | https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 
-<table>
-  <thead>
-    <tr>
-      <th><h4> 1. Retrieving a nested array from data structure: GET Route </h4> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
-      </td>
-    </tr>    
-  </tbody>
-</table>
+| 2. Finding an Item in a nested array: GET Route |
+| --------------------------------------------------------- |
+| https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey |
 
-<table>
-  <thead>
-    <tr>
-      <th><h4> 2. Finding an Item in a nested array: GET Route</h4> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey
-      </td>
-    </tr>    
-  </tbody>
-</table>
+| 3. Adding an Item into a nested array: GET Route |
+| --------------------------------------------------------- |
+| https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue |
 
+| 4. Updating a non-nested field (non-array): PATCH Route |
+| --------------------------------------------------------- |
+| https://<span></span>project-two-backend.onrender.com/:id/:field |
 
-<table>
-  <thead>
-    <tr>
-      <th><h4> 3. Adding an Item into a nested array: GET Route</h4> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
-      </td>
-    </tr>    
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th><h4> 4. Updating a non-nested field (non-array): PATCH ROUTE</h4> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        https://<span></span>project-two-backend.onrender.com/:id/:field
-      </td>
-    </tr>    
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th><h4> 5. Deleting from a nested array: PATCH Route </h4></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition
-      </td>
-    </tr>    
-  </tbody>
-</table>
+| 5. Deleting from a nested array: PATCH Route |
+| --------------------------------------------------------- |
+| https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition |
 
 All routes go through an id authentication through firebase. This means that user has to be logged in. In the real life version, there will not be a input box for users to key in at the frontend to manually block a number. Future enhancement include using firebase payload to req.user for better user Authorization.
 
