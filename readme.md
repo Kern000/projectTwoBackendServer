@@ -6,7 +6,7 @@ This express backend server tests the feasibility of refactoring as much code as
 <table>
   <thead>
     <tr>
-      <th><h4> 1. Retrieving a nested array from data structure: GET Route </h4> </th>
+      <th style="text-align: left;"><h4> 1. Retrieving a nested array from data structure: GET Route </h4> </th>
     </tr>
   </thead>
   <tbody>
