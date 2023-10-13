@@ -3,11 +3,20 @@ This express backend server tests the feasibility of refactoring as much code as
 
 <h2> Routes showcase </h2>
 
-<div style="border: '1px solid black'; padding: '10px'; background-color: 'gray'">
-  <h4> Retrieving a nested array from data structure </h4>
-  <p> Get Route <p>
-  <p> https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue <p>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th><h4> 1. Retrieving a nested array from data structure </h4></th>
+      <th>Get Route</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      https://<span></span>project-two-backend.onrender.com/:id/:fieldWithDataArrayAsValue
+    </tr>    
+  </tbody>
+</table>
+
 
 <h4> Finding an Item in a nested array </h4>
 GET Route
