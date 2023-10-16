@@ -44,9 +44,13 @@ const whiteListNumberSchema = Joi.object({
 })
 
 const controllerValidator = async (req, res, next) => {
+
+    console.log('middleware joi validation hit')
+
     if (req.body.code){
         try {
             countryCodeSchema.validate(req.body);
+            console.log('validation for country code success');
             next();
 
         } catch (error) {
@@ -57,6 +61,7 @@ const controllerValidator = async (req, res, next) => {
     else if (req.body.hpNumber){
         try {
             hpNumberSchema.validate(req.body);
+            console.log('validation for hp number success');
             next();
 
         } catch (error) {
@@ -67,6 +72,7 @@ const controllerValidator = async (req, res, next) => {
     else if (req.body.officeNumber){
         try {
             officeNumberSchema.validate(req.body);
+            console.log('validation for office number success');
             next();
 
         } catch (error) {
@@ -77,6 +83,7 @@ const controllerValidator = async (req, res, next) => {
     else if (req.body.homeNumber){
         try {
             homeNumberSchema.validate(req.body);
+            console.log('validation for home number success');
             next();
 
         } catch (error) {
@@ -87,6 +94,7 @@ const controllerValidator = async (req, res, next) => {
     else if (req.body.blockedNumber){
         try {
             blockedNumberSchema.validate(req.body);
+            console.log('validation for blocked number success');
             next();
 
         } catch (error) {
@@ -97,6 +105,7 @@ const controllerValidator = async (req, res, next) => {
     else if (req.body.whiteListedNumber){
         try {
             whiteListNumberSchema.validate(req.body);
+            console.log('validation for whitelist number success');
             next();
         } catch (error) {
             console.log("white listed number validation", error);
