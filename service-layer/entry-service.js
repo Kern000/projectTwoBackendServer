@@ -70,10 +70,77 @@ const deleteMatchingInNestedArray = async (userId, fieldWithDataArrayAsValue, ne
         }
 };
 
+const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObjectKey) => {
+
+    console.log('search for plus number service, userId here=>', userId);
+
+    const matchingItems = await Entry.aggregate([
+        {
+            $match:{
+                'user': userId
+            }
+        },
+        {
+            $project:{
+                [fieldWithDataArrayAsValue]:1
+            }
+        },
+        {
+            $unwind: `${fieldWithDataArrayAsValue}`
+        },
+        {
+            $match:{
+                [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
+            }
+        }
+    ])
+    console.log('matching items here', matchingItems);
+
+    if (matchingItems.length === 0){
+        throw new Error("Matching item not found");
+    }
+    return matchingItems;
+}
+
+const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObjectKey) => {
+
+    console.log('search for minus number service, userId here=>', userId)
+
+    const matchingItems = await Entry.aggregate([
+        {
+            $match:{
+                'user': userId
+            }
+        },
+        {
+            $project:{
+                [fieldWithDataArrayAsValue]:1
+            }
+        },
+        {
+            $unwind: `${fieldWithDataArrayAsValue}`
+        },
+        {
+            $match:{
+                [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
+            }
+        }
+    ])
+    console.log('matching items here', matchingItems);
+
+    if (matchingItems.length === 0){
+        throw new Error("Matching item not found");
+    }
+    return matchingItems;
+}
+
+
 module.exports =    {
                         retrieveNestedArrayData,
                         findItemInNestedArray,
                         addItemToNestedArray,
                         updateFieldData,
-                        deleteMatchingInNestedArray
+                        deleteMatchingInNestedArray,
+                        searchForMinusNumbers,
+                        searchForPlusNumbers
                     };

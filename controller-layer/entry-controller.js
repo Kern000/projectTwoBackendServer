@@ -6,6 +6,8 @@ const   {
             deleteMatchingInNestedArray: deleteArrayItem,
             retrieveNestedArrayData: retrieveArrayData,
             findItemInNestedArray: retrieveArrayItem,
+            searchForPlusNumbers: serviceSearchForPlusNumbers,
+            searchForMinusNumbers: serviceSearchForMinusNumbers
         } = require("../service-layer/entry-service");
 
 const retrieveNestedArray = async (req, res) => {
@@ -55,6 +57,51 @@ const findItemInNestedArray = async (req, res) => {
         return res.sendStatus(httpStatus.BAD_REQUEST);
     }
 }
+
+const searchForPlusNumbers = async (req, res) => {
+
+    console.log("search for plus numbers controller hit");
+
+    try{
+        const userId = req.params.id;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
+        const nestedObjectKey = req.params.nestedObjectKey;
+        
+        try {
+            let matchedItem = await serviceSearchForPlusNumbers(userId, fieldWithDataArrayAsValue, nestedObjectKey);
+            return res.status(201).send(matchedItem);
+
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    } catch (error) {
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+}
+
+const searchForMinusNumbers = async (req, res) => {
+
+    console.log("Search for minus number controller hit");
+
+    try{
+        const userId = req.params.id;
+        const fieldWithDataArrayAsValue = req.params.fieldWithDataArrayAsValue;
+        const nestedObjectKey = req.params.nestedObjectKey;
+        
+        try {
+            let matchedItem = await serviceSearchForMinusNumbers(userId, fieldWithDataArrayAsValue, nestedObjectKey);
+            return res.status(201).send(matchedItem);
+
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    } catch (error) {
+        console.log("Bad url", error);
+        return res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+}
+
 
 const addToNestedArray = async (req, res) => {
 
@@ -135,4 +182,6 @@ module.exports= {
                     addToNestedArray,
                     updateSettings,
                     deleteFromNestedArray,
+                    searchForMinusNumbers,
+                    searchForPlusNumbers
                 };
