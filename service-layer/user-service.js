@@ -33,24 +33,31 @@ const register = async (data) => {
 
     const {emailAddress, idToken} = data;
 
-    let existingUser = await User.findOne({'emailAddress':emailAddress});
-
     try {
-
         await firebaseAdmin.auth().verifyIdToken(idToken);
         console.log("Authenticated Valid Token");
 
-        if (!existingUser) {
-            existingUser = new User({'emailAddress':emailAddress});
-            await existingUser.save();
-            let newEntry = new Entry({user: existingUser._id});
-            await newEntry.save();
-            const fetchParamsId = newEntry._id.toString()
-            console.log(fetchParamsId)
-            return fetchParamsId
+        try {
+
+            let existingUser = await User.findOne({'emailAddress':emailAddress});
+
+            if (!existingUser) {
+                existingUser = new User({'emailAddress':emailAddress});
+                await existingUser.save();
+                let newEntry = new Entry({user: existingUser._id});
+                await newEntry.save();
+
+                const fetchParamsId = newEntry._id.toString()
+
+                console.log('service level fetched id to params id', fetchParamsId)
+                return fetchParamsId
+            }
+        } catch (error) {
+            console.error("User already exists", error);
+            throw error;
         }
     } catch (error) {
-        console.error("Error verifying token, failed registration", error);
+        console.log('Error verifying token, failed registration');
         throw error;
     }
 }
