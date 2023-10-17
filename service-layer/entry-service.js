@@ -137,6 +137,7 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
             // }
         ])
 
+
         console.log('matching items here in service', matchingItems);
         if (matchingItems.length === 0){
             console.log('matching items length is array w no items')
