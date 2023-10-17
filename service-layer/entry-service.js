@@ -87,7 +87,7 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
                 }
             },
             {
-                $unwind: `${fieldWithDataArrayAsValue}`
+                $unwind: `$${fieldWithDataArrayAsValue}`
             },
             {
                 $match:{
@@ -124,7 +124,7 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
                 }
             },
             {
-                $unwind: `${fieldWithDataArrayAsValue}`
+                $unwind: `$${fieldWithDataArrayAsValue}`
             },
             {
                 $match:{
