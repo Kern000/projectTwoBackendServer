@@ -121,6 +121,9 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
     const mongoObjectId = new ObjectId(userId)
     console.log('mongo object id here', mongoObjectId);
 
+    console.log('field with nested data array here', fieldWithDataArrayAsValue);
+    console.log('nestedObjectkey here =>', nestedObjectKey);
+
     try {
         const matchingItems = await Entry.aggregate([
             {
