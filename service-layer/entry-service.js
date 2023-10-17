@@ -98,10 +98,11 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
         console.log('matching items here in service', matchingItems);
 
         if (matchingItems.length === 0){
+            console.log('matching items length is array w no items')
             throw new Error("Matching item not found");
-        }
+        } else {
         return matchingItems;
-    
+        }
     } catch (error) {
         console.log('error in aggregation pipeline in service', error);
     }
@@ -132,15 +133,18 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
                 }
             }
         ])
+
         console.log('matching items here in service', matchingItems);
+        if (matchingItems.length === 0){
+            console.log('matching items length is array w no items')
+            throw new Error("Matching item not found");
+        } else {
+        return matchingItems;
+        }
     } catch (error){
         console.log('error in service aggregate pipeline=>', error)
     }
 
-    if (matchingItems.length === 0){
-        throw new Error("Matching item not found");
-    }
-    return matchingItems;
 }
 
 
