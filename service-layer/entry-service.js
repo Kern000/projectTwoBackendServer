@@ -91,7 +91,7 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
             },
             {
                 $match:{
-                    [`${nestedObjectKey}`]: {$regex: `^[+]`}
+                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
                 }
             }
         ])
@@ -129,7 +129,7 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
             },
             {
                 $match:{
-                    [`${nestedObjectKey}`]: {$regex: `^[-]`}
+                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
                 }
             }
         ])
