@@ -1,4 +1,5 @@
 const { Entry } = require('../model-schema');
+const ObjectId = require('mongodb').ObjectId;
 
 const retrieveNestedArrayData = async (userId, fieldWithDataArrayAsValue, parameterToSortBy) => {
     
@@ -74,11 +75,14 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
 
     console.log('search for plus number service, userId here=>', userId);
 
+    const mongoObjectId = new ObjectId(userId)
+    console.log('mongo object id here', mongoObjectId);
+
     try{
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    '_id': userId
+                    '_id': mongoObjectId
                 }
             }
             // ,
@@ -114,11 +118,14 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
 
     console.log('search for minus number service, userId here=>', userId)
 
+    const mongoObjectId = new ObjectId(userId)
+    console.log('mongo object id here', mongoObjectId);
+
     try {
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    '_id': userId
+                    '_id': mongoObjectId
                 }
             }
             // ,
