@@ -42,15 +42,17 @@ const register = async (data) => {
             let existingUser = await User.findOne({'emailAddress':emailAddress});
 
             if (!existingUser) {
+
                 existingUser = new User({'emailAddress':emailAddress});
                 await existingUser.save();
+
                 let newEntry = new Entry({user: existingUser._id});
                 await newEntry.save();
 
-                const fetchParamsId = newEntry._id.toString()
+                const fetchParamsId = newEntry._id.toString();
 
                 console.log('service level fetched id to params id', fetchParamsId)
-                return fetchParamsId
+                return fetchParamsId;
             }
         } catch (error) {
             console.error("User already exists", error);

@@ -18,7 +18,7 @@ router.post("/:id/:fieldWithDataArrayAsValue", [controllerValidator], addToNeste
 router.get("/:id/:fieldWithDataArrayAsValue", retrieveNestedArray);
 router.get("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey", findItemInNestedArray)
 router.patch("/:id/:field", [controllerValidator], updateSettings);
-router.patch("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition", [controllerValidator], deleteFromNestedArray);
+router.patch("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/:itemMatchCondition", deleteFromNestedArray);
 
 router.get("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/searchPlus", searchForPlusNumbers);
 router.get("/:id/:fieldWithDataArrayAsValue/:nestedObjectKey/searchMinus", searchForMinusNumbers);
