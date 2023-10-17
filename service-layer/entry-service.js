@@ -94,7 +94,7 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
             }
         }
     ])
-    console.log('matching items here', matchingItems);
+    console.log('matching items here in service', matchingItems);
 
     if (matchingItems.length === 0){
         throw new Error("Matching item not found");
@@ -126,7 +126,7 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
             }
         }
     ])
-    console.log('matching items here', matchingItems);
+    console.log('matching items here in service', matchingItems);
 
     if (matchingItems.length === 0){
         throw new Error("Matching item not found");

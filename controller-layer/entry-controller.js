@@ -69,6 +69,7 @@ const searchForPlusNumbers = async (req, res) => {
         
         try {
             let matchedItem = await serviceSearchForPlusNumbers(userId, fieldWithDataArrayAsValue, nestedObjectKey);
+            console.log('matched item here', matchedItem);
             return res.status(201).send(matchedItem);
 
         } catch (error) {
@@ -91,6 +92,7 @@ const searchForMinusNumbers = async (req, res) => {
         
         try {
             let matchedItem = await serviceSearchForMinusNumbers(userId, fieldWithDataArrayAsValue, nestedObjectKey);
+            console.log('matched Item here=>', matchedItem)
             return res.status(201).send(matchedItem);
 
         } catch (error) {
