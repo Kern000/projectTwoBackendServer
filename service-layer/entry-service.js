@@ -85,21 +85,21 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
                     '_id': mongoObjectId
                 }
             }
-            // ,
-            // {
-            //     $project:{
-            //         [fieldWithDataArrayAsValue]:1
-            //     }
-            // },
-            // {
-            //     $unwind: `$${fieldWithDataArrayAsValue}`
-            // }
-            // ,
-            // {
-            //     $match:{
-            //         [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
-            //     }
-            // }
+            ,
+            {
+                $project:{
+                    [fieldWithDataArrayAsValue]:1
+                }
+            },
+            {
+                $unwind: `$${fieldWithDataArrayAsValue}`
+            }
+            ,
+            {
+                $match:{
+                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
+                }
+            }
         ])
         console.log('matching items here in service', matchingItems);
 
@@ -128,20 +128,20 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
                     '_id': mongoObjectId
                 }
             }
-            // ,
-            // {
-            //     $project:{
-            //         [fieldWithDataArrayAsValue]:1
-            //     }
-            // },
-            // {
-            //     $unwind: `$${fieldWithDataArrayAsValue}`
-            // },
-            // {
-            //     $match:{
-            //         [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
-            //     }
-            // }
+            ,
+            {
+                $project:{
+                    [fieldWithDataArrayAsValue]:1
+                }
+            },
+            {
+                $unwind: `$${fieldWithDataArrayAsValue}`
+            },
+            {
+                $match:{
+                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
+                }
+            }
         ])
 
 
