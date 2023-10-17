@@ -78,7 +78,7 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    'user': userId
+                    '_id': userId
                 }
             },
             {
@@ -117,7 +117,7 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    'user': userId
+                    '_id': userId
                 }
             },
             {
@@ -127,13 +127,12 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
             },
             {
                 $unwind: `$${fieldWithDataArrayAsValue}`
+            },
+            {
+                $match:{
+                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
+                }
             }
-            // ,
-            // {
-            //     $match:{
-            //         [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
-            //     }
-            // }
         ])
 
         console.log('matching items here in service', matchingItems);
