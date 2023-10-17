@@ -1,5 +1,4 @@
 const { Entry } = require('../model-schema');
-const ObjectId = require('mongodb').ObjectId;
 
 const retrieveNestedArrayData = async (userId, fieldWithDataArrayAsValue, parameterToSortBy) => {
     
@@ -79,23 +78,24 @@ const searchForPlusNumbers = async (userId, fieldWithDataArrayAsValue, nestedObj
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    '_id': new ObjectId(userId)
-                }
-            },
-            {
-                $project:{
-                    [fieldWithDataArrayAsValue]:1
-                }
-            },
-            {
-                $unwind: `$${fieldWithDataArrayAsValue}`
-            }
-            ,
-            {
-                $match:{
-                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
+                    '_id': userId
                 }
             }
+            // ,
+            // {
+            //     $project:{
+            //         [fieldWithDataArrayAsValue]:1
+            //     }
+            // },
+            // {
+            //     $unwind: `$${fieldWithDataArrayAsValue}`
+            // }
+            // ,
+            // {
+            //     $match:{
+            //         [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[+]`}
+            //     }
+            // }
         ])
         console.log('matching items here in service', matchingItems);
 
@@ -118,22 +118,23 @@ const searchForMinusNumbers = async (userId, fieldWithDataArrayAsValue, nestedOb
         const matchingItems = await Entry.aggregate([
             {
                 $match:{
-                    '_id': new ObjectId(userId)
-                }
-            },
-            {
-                $project:{
-                    [fieldWithDataArrayAsValue]:1
-                }
-            },
-            {
-                $unwind: `$${fieldWithDataArrayAsValue}`
-            },
-            {
-                $match:{
-                    [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
+                    '_id': userId
                 }
             }
+            // ,
+            // {
+            //     $project:{
+            //         [fieldWithDataArrayAsValue]:1
+            //     }
+            // },
+            // {
+            //     $unwind: `$${fieldWithDataArrayAsValue}`
+            // },
+            // {
+            //     $match:{
+            //         [`${fieldWithDataArrayAsValue}.${nestedObjectKey}`]: {$regex: `^[-]`}
+            //     }
+            // }
         ])
 
         console.log('matching items here in service', matchingItems);
