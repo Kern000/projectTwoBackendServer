@@ -21,7 +21,6 @@ const retrieveNestedArray = async (req, res) => {
 
         try{
             let retrievedData = await retrieveArrayData(userId, fieldWithDataArrayAsValue, parameterToSortBy);
-            console.log("Retrieved data here", retrievedData);
             return res.status(201).send(retrievedData);
 
         } catch (error) {
